@@ -57,7 +57,6 @@ class Post(CreatedModel):
     )
 
     class Meta:
-        # ordering = ('-pub_date',)
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
         default_related_name = 'posts'
