@@ -57,7 +57,7 @@ class Post(CreatedModel):
     )
 
     class Meta:
-        ordering = ('-pub_date',)
+        # ordering = ('-pub_date',)
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
         default_related_name = 'posts'
@@ -108,7 +108,7 @@ class Follow(models.Model):
         help_text='Пользователь, который оформил подписку',
         on_delete=models.CASCADE,
     )
-    author = models.ForeignKey(
+    following = models.ForeignKey(
         User,
         related_name='following',
         verbose_name='Автор контента',
@@ -121,10 +121,10 @@ class Follow(models.Model):
         verbose_name_plural = 'Подписки'
         constraints = (
             models.UniqueConstraint(
-                fields=('user', 'author'),
+                fields=('user', 'following'),
                 name='unique_follower'
             ),
         )
 
     def __str__(self) -> str:
-        return (f'{self.user} подписан на посты {self.author}')
+        return (f'{self.user} подписан на посты {self.following}')
