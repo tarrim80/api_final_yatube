@@ -2,7 +2,7 @@
 
 ## Выполненная задача
 
-Дописан код и приведён в соответствие с документацией: добалены недостающие модели в приложении posts, созданы адреса и представления для обработки запросов в приложении api. Задача выполнена в соответствии с Документацией — техническим заданием.
+Дописан код и приведён в соответствие с документацией: добавлены недостающие модели в приложении posts, созданы адреса и представления для обработки запросов в приложении api. Задача выполнена в соответствии с Документацией — техническим заданием.
 
 ---
 В проекте описана модель Follow, в ней реализовано два поля — ```user``` (кто подписан) и ```following``` (на кого подписан). Для этой модели в документации уже описан эндпоинт ```/follow/``` и два метода: 
@@ -22,9 +22,12 @@
 - Добавление новых пользователей через API не реализовано.
 
 ## Документация к API 
-Документация доступна по адресу:
+Документация доступна по адресам:
 
-[http://localhost:8000/redoc/](http://127.0.0.1:8000/redoc/ "Документация")
+[http://localhost:8000/redoc/](http://127.0.0.1:8000/redoc/ "Документация Redoc")
+
+
+[http://localhost:8000/swagger/](http://127.0.0.1:8000/swagger/ "Документация Swagger")
 
 ## Как запустить проект:
 
@@ -87,8 +90,8 @@ POST http://localhost:8000/api/v1/jwt/create/
 Content-Type: application/json
 
 {
-"username": "string",
-"password": "string"
+    "username": "string",
+    "password": "string"
 }
 ```
 ### Получение публикаций
@@ -103,19 +106,19 @@ GET http://localhost:8000/api/v1/posts/
 Ответ: статус 200
 ```json
 {
-"count": 123,
-"next": "http://api.example.org/accounts/?offset=400&limit=100",
-"previous": "http://api.example.org/accounts/?offset=200&limit=100",
-"results": [
-{
-"id": 0,
-"author": "string",
-"text": "string",
-"pub_date": "2021-10-14T20:41:29.648Z",
-"image": "string",
-"group": 0
-}
-]
+    "count": 123,
+    "next": "http://api.example.org/accounts/?offset=400&limit=100",
+    "previous": "http://api.example.org/accounts/?offset=200&limit=100",
+    "results": [
+        {
+            "id": 0,
+            "author": "string",
+            "text": "string",
+            "pub_date": "2021-10-14T20:41:29.648Z",
+            "image": "string",
+            "group": 0
+        }
+    ]
 }
 ```
 ### Создание публикации
@@ -129,21 +132,21 @@ Content-Type: application/json
 Authorization: Bearer <JWTtoken>
 
 {
-"text": "string",
-"image": "string",
-"group": 0
+    "text": "string",
+    "image": "string",
+    "group": 0
 }
 ```
 
 Ответ: статус 201
 ```json
 {
-"id": 0,
-"author": "string",
-"text": "string",
-"pub_date": "2019-08-24T14:15:22Z",
-"image": "string",
-"group": 0
+    "id": 0,
+    "author": "string",
+    "text": "string",
+    "pub_date": "2019-08-24T14:15:22Z",
+    "image": "string",
+    "group": 0
 }
 ```
 ---
