@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework import filters, viewsets
 from rest_framework.permissions import AllowAny
 from api.permissions import IsAuthorOrReadOnly
@@ -22,7 +24,8 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 class FollowViewSet(viewsets.ModelViewSet):
     """CRUD подписок"""
     serializer_class = FollowSerializer
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend)
+    filterset_fields = ('following',)
     search_fields = ('following__username',)
     pagination_class = None
 
@@ -40,6 +43,8 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthorOrReadOnly,)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('pub_date', 'group', 'author')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -49,6 +54,8 @@ class CommentViewSet(viewsets.ModelViewSet):
     """CRUD комментариев"""
     serializer_class = CommentSerializer
     permission_classes = (IsAuthorOrReadOnly,)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('created', 'author')
 
     def get_queryset(self):
         post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
